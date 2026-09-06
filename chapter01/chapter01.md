@@ -270,33 +270,33 @@ LLM 제안을 검증하지 않고 바로 사용하면 분석 기준이 실제 �
 
 ## 5. Prompt Log
 
-- 사용 목적:
-LLM을 분석 질문 후보를 얻기 위한 보조 도구로 사용했습니다.
+- 사용 목적: LLM을 분석 질문 후보를 얻기 위한 보조 도구로 사용했습니다.
 온라인 쇼핑몰 데이터에서 completed 주문 기준으로 확인할 수 있는 분석 질문을 제안받고, 그중 현재 분석 목적에 가장 적합한 질문을 선택하기 위해 사용했습니다.
-- 입력 Prompt 요약:
-온라인 쇼핑몰 데이터는 customers, products, orders, order_items 4개 파일로 구성되어 있다.
+- 입력 Prompt 요약: 온라인 쇼핑몰 데이터는 customers, products, orders, order_items 4개 파일로 구성되어 있다.
 completed 주문 기준으로 상품 카테고리별 총 주문 금액 차이와 가장 많이 기여하는 카테고리를 이해하고 싶다.
 초보 데이터 분석자가 먼저 확인할 분석 질문 5개를 제안하고, 각 질문에 필요한 파일과 컬럼 후보를 함께 제시해 달라고 요청했다.
 또한 원인을 단정하지 말고 현재 데이터로 확인 가능한 질문만 제안해 달라고 요청했다.
-- LLM 답변 요약:
-LLM을 분석 질문 후보를 얻기 위한 보조 도구로 사용했다.
+- LLM 답변 요약: LLM을 분석 질문 후보를 얻기 위한 보조 도구로 사용했다.
 온라인 쇼핑몰 데이터에서 completed 주문 기준으로 확인할 수 있는 분석 질문을 제안받고, 그중 현재 분석 목적에 가장 적합한 질문을 선택하기 위해 사용했다.
 - 실제 반영 여부: 반영함.
 LLM이 제안한 질문 중 “상품 카테고리별 completed 주문 금액 비교”를 현재 분석 질문으로 사용하기로 했다.
 - 사람이 검증한 항목:
-- 필요한 파일이 실제로 존재하는지 확인했다.
-- orders.csv에 order_id와 order_status 컬럼이 있는지 확인했다.
-- order_items.csv에 order_id, product_id, quantity, unit_price 컬럼이 있는지 확인했다.
-- products.csv에 product_id와 category 컬럼이 있는지 확인했다.
-- orders와 order_items를 order_id로 연결할 수 있는지 확인했다.
-- order_items와 products를 product_id로 연결할 수 있는지 확인했다.
-- 주문 금액을 quantity × unit_price로 계산할 수 있는지 확인했다.
-- 원인을 단정하지 않고 카테고리별 주문 금액 차이만 확인하는 질문인지 검토했다.
+필요한 파일이 실제로 존재하는지 확인했습니다.
+orders.csv에 order_id와 order_status 컬럼이 있는지 확인했습니다.
+order_items.csv에 order_id, product_id, quantity, unit_price 컬럼이 있는지 확인했습니다.
+products.csv에 product_id와 category 컬럼이 있는지 확인했습니다.
+orders와 order_items를 order_id로 연결할 수 있는지 확인했습니다.
+order_items와 products를 product_id로 연결할 수 있는지 확인했습니다.
+주문 금액을 quantity × unit_price로 계산할 수 있는지 확인했습니다.
+원인을 단정하지 않고 카테고리별 주문 금액 차이만 확인하는 질문인지 검토했습다.
 - 사람이 수정한 내용:
-LLM 제안 자체는 completed 주문 기준을 포함하고 있어 수정 없이 사용하기로 했다.
-다만 실제 분석에서 주문 금액 계산식을 quantity × unit_price로 명확히 하고, 결과 해석 시 특정 카테고리가 왜 많이 팔렸는지는 단정하지 않기로 했다.
+LLM 제안 자체는 completed 주문 기준을 포함하고 있어 수정 없이 사용하기로 했습니다.
+다만 실제 분석에서 주문 금액 계산식을 quantity × unit_price로 명확히 하고, 결과 해석 시 특정 카테고리가 왜 많이 팔렸는지는 단정하지 않기로 했습니다.
 - 남은 확인 사항:
-
+실제 코드 실행을 통해 completed 주문만 정확히 필터링되는지 확인해야 한다.
+세 파일을 병합했을 때 누락되거나 연결되지 않는 데이터가 있는지 확인해야 한다.
+quantity와 unit_price에 결측치나 이상치가 있는지 확인해야 한다.
+카테고리별 총 주문 금액뿐 아니라 판매 수량과 주문 건수도 함께 비교할 필요가 있다.
 
 ### 결과 관찰
 
