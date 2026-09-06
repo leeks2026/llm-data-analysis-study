@@ -94,16 +94,6 @@ completed 주문 기준으로 상품 카테고리별 총 주문 금액은 어떻
 | `products.csv`    | `category`     | 상품 카테고리별로 집계하기 위한 기준      |
 
 
-| 파일 | 필요한 컬럼 | 필요한 이유 |
-| orders.csv | order_id | 주문 상세 데이터와 연결하기 위한 키 |
-| orders.csv | order_status | completed 주문만 필터링하기 위한 기준 |
-| order_items.csv | order_id | 주문 정보와 연결하기 위한 키 |
-| order_items.csv | product_id | 상품 정보와 연결하기 위한 키 |
-| order_items.csv | quantity | 주문 금액 계산에 사용 |
-| order_items.csv | unit_price | 주문 금액 계산에 사용 |
-| products.csv | product_id | 주문 상세 데이터와 연결하기 위한 키 |
-| products.csv | category | 상품 카테고리별로 집계하기 위한 기준 |
-
 ### 데이터 연결 관계
 
 ```text
