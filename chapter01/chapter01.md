@@ -223,15 +223,16 @@ LLM 제안 중 하나 이상을 선택해 검토합니다.
 | 선택한 LLM 제안      | 상품 카테고리별 completed 주문 금액을 비교하여 어떤 카테고리가 전체 주문 금액에 가장 크게 기여하는지 확인한다.                                                                                                                      |
 | 필요한 파일          | `orders.csv`, `order_items.csv`, `products.csv`                                                                                                                                          |
 | 필요한 컬럼          | `orders.order_id`, `orders.order_status`, `order_items.order_id`, `order_items.product_id`, `order_items.quantity`, `order_items.unit_price`, `products.product_id`, `products.category` |
-| 계산 범위           | 전체 주문이 아니라 `order_status`가 `completed`인 주문만 대상으로 한다. 주문 금액은 `quantity × unit_price`로 계산한다.                                                                                               |
+| 계산 범위           | LLM 제안처럼 `order_status`가 `completed`인 주문만 대상으로 한다. 주문 금액은 `quantity × unit_price`로 계산한다.                                                                                                 |
 | 실제 데이터 확인 필요 여부 | 필요하다. 세 파일이 실제로 존재하는지, 필요한 컬럼이 있는지, `order_id`와 `product_id` 기준으로 연결 가능한지 확인해야 한다.                                                                                                       |
-| 원인 단정 여부        | 원인을 단정하면 안 된다. 카테고리별 주문 금액 차이는 확인할 수 있지만, 광고, 할인, 시즌성, 고객 선호 같은 원인은 현재 데이터만으로 판단하기 어렵다.                                                                                                  |
-| 최종 판단           | 수정 후 사용                                                                                                                                                                                  |
+| 원인 단정 여부        | 원인을 단정하지 않는다. 카테고리별 주문 금액 차이는 확인할 수 있지만, 광고, 할인, 시즌성, 고객 선호 같은 원인은 현재 데이터만으로 판단하기 어렵다.                                                                                                   |
+| 최종 판단           | 사용                                                                                                                                                                                       |
+
 
 ### 내가 수정한 내용
 
 ```text
-LLM 제안을 수정했다면 무엇을 어떻게 바꿨는지 작성하세요.
+사용
 ```
 
 ### 결과 관찰
