@@ -470,17 +470,18 @@ https://github.com/leeks2026/llm-data-analysis-study/blob/main/chapter01/chapter
 
 ### 수행 상태
 
-- [ ] COMPLETE
+- [x] COMPLETE
 - [ ] PARTIAL
 
 ### 내가 가장 중요하게 내린 판단 1개
 
 ```text
-여기에 작성하세요.
+LLM이 제안한 상품 카테고리별 completed 주문 금액 비교는 현재 데이터 구조와 분석 목적에 적합하다고 판단했습니다.
+다만 카테고리별 주문 금액 차이는 확인할 수 있지만, 특정 카테고리가 왜 많이 팔렸는지는 현재 데이터만으로 단정하지 않기로 했습니다.
 ```
 
 ### 아직 확인이 필요한 내용 1개
 
 ```text
-여기에 작성하세요.
+Chapter 02에서  orders.csv, order_items.csv, products.csv를 실제로 병합하여 completed 주문 기준 카테고리별 총 주문 금액을 계산해봐야 합니다.
 ```
