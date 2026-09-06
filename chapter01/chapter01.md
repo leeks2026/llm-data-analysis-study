@@ -7,10 +7,10 @@
 
 ## 0. 제출 정보
 
-- 이름:
-- GitHub ID:
+- 이름: `이경석`
+- GitHub ID: `leeks2026`
 - 개인 저장소명: `llm-data-analysis-study`
-- 작성일:
+- 작성일: `20260906`
 - 사용한 LLM:
 
 ### 최종 제출 URL
