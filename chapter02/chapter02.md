@@ -23,7 +23,7 @@ https://github.com/leeks2026/llm-data-analysis-study/blob/main/chapter02/chapter
 ### 실행 내용
 
 ```text
-python --version 또는 py --version
+python --version
 git --version
 ```
 
