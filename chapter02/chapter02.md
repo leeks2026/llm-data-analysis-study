@@ -63,19 +63,19 @@ Codespaces에서는  커널 연결 문제나 작업 폴더 경로 문제가 생�
 
 ### 수행 내용
 
-- [ ] 공식 Public 저장소 clone
-- [ ] 프로젝트 루트 확인
-- [ ] `.venv` 생성
-- [ ] `.venv` 활성화
-- [ ] `requirements.txt` 설치
+- [x] 공식 Public 저장소 clone
+- [x] 프로젝트 루트 확인
+- [x] `.venv` 생성
+- [x] `.venv` 활성화
+- [x] `requirements.txt` 설치
 
 ### 핵심 실행 결과
 
 ```text
-현재 프로젝트 경로:
-터미널 Python 실행 파일:
-가상환경 활성화 여부:
-패키지 설치 결과:
+현재 프로젝트 경로: /workspaces/llm-data-analysis-study/llm-data-analysis-course
+터미널 Python 실행 파일: /workspaces/llm-data-analysis-study/llm-data-analysis-course/.venv/bin/python
+가상환경 활성화 여부: 터미널 앞에 (.venv) 표시됨
+패키지 설치 결과: requirements.txt 패키지들이 정상적으로 설치됨
 ```
 
 ### Evidence
@@ -84,19 +84,30 @@ Codespaces에서는  커널 연결 문제나 작업 폴더 경로 문제가 생�
 
 ### 결과 관찰
 
-현재 `python`이 어떤 실행 파일을 가리키는지 작성하세요.
+터미널에서 .venv를 활성화했더니 앞에 (venv) 표시가 생겼습니다.
+`python -c "import sys; print(sys.executable)"` 명령을 실행했더니  
+경로가 `/workspaces/llm-data-analysis-study/llm-data-analysis-course/.venv/bin/python`으로 나왔습니다.  
+즉, 지금 사용하는 Python이 내가 만든 `.venv` 가상환경 안에 있다는 걸 확인했습니다.
+
+패키지 설치도 오류 없이 끝났습니다.
 
 ### 나의 해석과 판단
 
-시스템 Python과 프로젝트 `.venv`를 분리하는 것이 왜 필요한지 자신의 말로 작성하세요.
+지금 사용하는 Python이 시스템 기본 Python이 아니라 내가 만든 .venv를 가리키고 있다는 걸 확인했습니다.
+이렇게 분리해 두면 다른 프로젝트랑 패키지가 섞이지 않고, 이 프로젝트만의 환경을 유지할 수 있습니다.
+그래서 앞으로 Notebook을 실행할 때도 패키지 충돌 같은 문제가 덜 생길 거라고 생각합니다.
 
 ### 업무·분석적 의미
 
-다른 사람이 같은 프로젝트를 재실행할 때 가상환경이 주는 이점을 작성하세요.
+가상환경을 쓰면 다른 사람도 같은 저장소를 clone해서 똑같은 환경을 만들 수 있습니다.
+예를 들어 팀원이 내 저장소를 받아서 실행해도, .venv와 requirements.txt 덕분에 같은 버전의 패키지를 설치할 수 있습니다.
+이렇게 하면 팀원간 호환성 문제가 줄어들고, 협업할 때 훨씬 편리합니다.
 
 ### 한계와 추가 확인 사항
 
-회사/기관 PC 정책, Python 버전 차이 등 현재 환경의 제약을 작성하세요.
+지금은 Codespaces 환경이라 잘 되었지만, 회사나 기관 PC에서는 보안 정책 때문에 가상환경 활성화가 막힐 수도 있습니다.
+또 Python 버전이 다르면 일부 패키지가 설치가 안 되거나 동작이 달라질 수 있습니다.
+그래서 이후 단계에서 Notebook 커널이 .venv랑 정확히 연결되는지 꼭 확인해야 합니다.
 
 ---
 
