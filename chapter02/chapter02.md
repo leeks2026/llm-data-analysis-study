@@ -151,10 +151,10 @@ Notebook 실행 위치(Path.cwd())가 프로젝트 루트가 아니라 다른 �
 ### 확인 결과
 
 ```text
-DATA_DIR 존재 여부:
-customers.csv 존재 여부:
-customers.shape:
-주요 컬럼:
+DATA_DIR 존재 여부: 존재함을 확인했습니다.
+customers.csv 존재 여부: 존재함을 확인했습니다.
+customers.shape: (150, 6)
+주요 컬럼: ['customer_id', 'name', 'gender', 'age', 'city', 'signup_date']
 ```
 
 ### Evidence
