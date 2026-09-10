@@ -85,6 +85,7 @@ Codespaces에서는  커널 연결 문제나 작업 폴더 경로 문제가 생�
 ### 결과 관찰
 
 터미널에서 .venv를 활성화했더니 앞에 (venv) 표시가 생겼습니다.
+
 `python -c "import sys; print(sys.executable)"` 명령을 실행했더니  
 경로가 `/workspaces/llm-data-analysis-study/llm-data-analysis-course/.venv/bin/python`으로 나왔습니다.  
 즉, 지금 사용하는 Python이 내가 만든 `.venv` 가상환경 안에 있다는 걸 확인했습니다.
@@ -116,9 +117,9 @@ Codespaces에서는  커널 연결 문제나 작업 폴더 경로 문제가 생�
 ### 확인 결과
 
 ```text
-VS Code Python 인터프리터:
-Notebook sys.executable:
-Notebook Path.cwd():
+VS Code Python 인터프리터: /workspaces/llm-data-analysis-study/llm-data-analysis-course/.venv/bin/python
+Notebook sys.executable: /workspaces/llm-data-analysis-study/llm-data-analysis-course/.venv/bin/python
+Notebook Path.cwd(): /workspaces/llm-data-analysis-study/llm-data-analysis-course
 ```
 
 ### Evidence
@@ -127,19 +128,21 @@ Notebook Path.cwd():
 
 ### 결과 관찰
 
-터미널 Python과 Notebook Python이 같은 `.venv`인지 작성하세요.
+터미널에서 Python을 실행했을 때와 Notebook에서 Python을 실행했을 때, 둘 다 같은 .venv 가상환경을 가리키고 있음을 확인했습니다. 즉, 터미널과 Notebook이 같은 Python 환경을 사용하고 있습니다.
 
 ### 나의 해석과 판단
 
-둘이 다를 경우 어떤 문제가 발생할 수 있는지 작성하세요.
+만약 터미널과 Notebook이 서로 다른 Python을 사용한다면, 터미널에서 설치한 패키지가 Notebook에서는 보이지 않아 오류가 날 수 있습니다. 예를 들어, 터미널에서 pandas를 설치했는데 Notebook에서는 Error가 뜨는 상황이 생길 수 있습니다. 그래서 두 환경을 꼭 맞춰야 합니다.
 
 ### 업무·분석적 의미
 
-`ModuleNotFoundError` 같은 환경 오류를 줄이는 데 어떤 도움이 되는지 작성하세요.
+인터프리터와 커널을 같은 .venv로 맞추면, 패키지 설치와 실행 환경이 일관되게 유지됩니다. 이로 인해 환경 불일치로 인한 오류를 줄이고, 데이터 분석 실습이나 협업 시 내 환경에서는 되는데 다른 사람 환경에서는 안되는 문제를 예방할 수 있습니다.
 
 ### 한계와 추가 확인 사항
 
-커널 이름만 보고 판단하면 안 되는 이유 등 추가 확인 사항을 작성하세요.
+실제로 sys.executable을 출력해 .venv/bin/python을 가리키는지 확인해야 합니다.
+Codespaces에서는 기본 Python 커널이 자동으로 선택될 수 있으므로, 매번 프로젝트별 .venv를 직접 선택하는 습관이 필요합니다.
+Notebook 실행 위치(Path.cwd())가 프로젝트 루트가 아니라 다른 폴더를 가리키면 데이터 파일을 불러올 때 오류가 날 수 있으므로, 이 부분도 반드시 확인해야 합니다.
 
 ---
 
