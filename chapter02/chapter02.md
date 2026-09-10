@@ -13,7 +13,7 @@
 ### 최종 제출 URL
 
 ```text
-https://github.com/<GitHub-ID>/llm-data-analysis-study/blob/main/chapter02/chapter02.md
+https://github.com/leeks2026/llm-data-analysis-study/blob/main/chapter02/chapter02.md
 ```
 
 ---
@@ -30,7 +30,8 @@ git --version
 ### 실행 결과
 
 ```text
-여기에 실제 결과를 작성하세요.
+Python 3.14.2
+git version 2.55.0
 ```
 
 ### Evidence
