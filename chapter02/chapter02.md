@@ -8,7 +8,7 @@
 - GitHub ID: `leeks2026`
 - 개인 저장소: `llm-data-analysis-study`
 - 작성일: `20260910`
-- 운영체제: `Codespaces (Linux)`
+- 운영체제: `Linux (Codespaces)`
 
 ### 최종 제출 URL
 
