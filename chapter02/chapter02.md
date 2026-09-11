@@ -163,7 +163,7 @@ customers.shape: (150, 6)
 
 ### 결과 관찰
 
-customers.head() 실행 결과 컬럼의 앞부분 값들이 정상적으로 표시되었습니다.
+customers.head() 실행 결과 컬럼의 앞부분 값들이 정상적으로 출력되었습니다.
 customers.shape 결과는 (150, 6) 행과 컬럼이 포함된 데이터임을 확인했습니다.
 customers.columns 결과에서 주요 컬럼명이 정상적으로 출력되었습니다.
 즉, 샘플 데이터가 정상적으로 불러와졌고 Notebook에서 실행이 잘 되고 있습니다.
