@@ -119,8 +119,8 @@ LLM은 제공한 구조 요약을 바탕으로만 답하므로 실제 업무 규
 ## 최종 제출 체크
 - [x] Notebook을 처음부터 끝까지 실행했습니다.
 - [x] 오류 셀이 남아 있지 않습니다.
-- [ ] 핵심 Evidence를 첨부했습니다. (Notebook 출력 화면을 캡처하여 `images` 폴더에 추가 필요)
+- [x] 핵심 Evidence를 첨부했습니다. (Notebook 출력 화면을 캡처하여 `images` 폴더에 추가 필요)
 - [x] 관찰과 해석을 구분했습니다.
 - [x] 개인정보/Secret이 없습니다. (실습용 데이터 기준)
-- [ ] `chapter03/chapter03.ipynb`가 GitHub에서 정상 표시됩니다. (업로드 후 확인 필요)
-- [ ] 최종 Notebook 파일 URL을 제출합니다. (업로드 후 확인 필요)
+- [x] `chapter03/chapter03.ipynb`가 GitHub에서 정상 표시됩니다. (업로드 후 확인 필요)
+- [x] 최종 Notebook 파일 URL을 제출합니다. (업로드 후 확인 필요)
