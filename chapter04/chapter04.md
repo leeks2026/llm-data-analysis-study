@@ -6,7 +6,7 @@
 - 이름: `이경석`
 - GitHub ID: `leeks2026`
 - 작성일: `20260928`
-- 최종 제출 URL:
+- 최종 제출 URL: `https://github.com/leeks2026/llm-data-analysis-study/blob/main/chapter04/chapter04.ipynb`
 
 ## 1. 질문과 필요한 데이터 선택
 ### 내가 확인하려는 질문
@@ -71,20 +71,27 @@ completed 주문 기준으로 어떤 카테고리에서 금액 기여가 큰지 
 ![필터와 파생 컬럼](images/step02_transform.png)
 
 ### 결과 관찰
+주문 상세 데이터에 `line_total` 컬럼을 추가하여 각 주문 라인의 금액을 계산했습니다. 
+이후 completed 주문만 필터링해 분석에 사용했고 completed 주문 상세의 `line_total` 합계는 `148,990,000원`으로 확인되었습다.
 
 ### 나의 해석과 판단
-필터 기준이 달라지면 결과가 어떻게 달라질지 작성하세요.
+이번 과제의 질문은 완료된 주문 기준의 금액을 비교하는 것이므로 completed 주문만 사용하는 것이 적절합니다. 
+만약 cancelled나 refunded 주문을 포함하면 실제로 완료되지 않은 주문 금액까지 포함되어 카테고리별 결과가 왜곡될 수 있습니다.
 
 ### 업무·분석적 의미
+필터 조건을 명확히 정의하면 분석 결과를 해석할 때 혼동을 줄일 수 있습니다. 
+예를 들어 운영팀은 completed 주문 기준의 판매 흐름을 보고, CS팀은 cancelled나 refunded 주문을 별도로 분석하는 방식으로 목적에 따라 데이터를 나누어 볼 수 있습니다.
 
 ### 한계와 추가 확인 사항
+completed 상태라고 해도 실제 정산 완료 여부와 완전히 같다고 볼 수는 없습니다. 
+실제 매출 분석을 하려면 결제 완료 시점, 환불 처리 시점, 할인 금액, 세금, 배송비 등의 정보가 추가로 필요합니다.
 
 ## 3. merge 검증
-- 병합한 데이터:
-- 사용한 key:
-- `validate` 결과:
-- `indicator` 결과:
-- 병합 전/후 행 수:
+- 병합한 데이터: `order_items`, `orders`, `products`, `customers`
+- 사용한 key: `order_id`, `product_id`, `customer_id`
+- `validate` 결과: `order_items`와 `orders` 병합은 `many_to_one` 관계로 검증
+- `indicator` 결과: 미매칭 데이터 없이 모두 매칭됨
+- 병합 전/후 행 수: 병합 후에도 주문 상세 기준 행 수가 유지됨
 
 ![merge 검증](images/step03_merge.png)
 
