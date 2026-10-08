@@ -6,7 +6,7 @@
 - 이름: `이경석`
 - GitHub ID: `leeks2026`
 - 작성일: `20261008`
-- 최종 제출 URL: 미입력
+- 최종 제출 URL: `https://github.com/leeks2026/llm-data-analysis-study/blob/main/chapter05/chapter05.ipynb`
 
 ## 1. 전처리 전 상태 기록
 - 각 데이터 shape: customers (152, 6), products (102, 4), orders (302, 5), order_items (765, 5)
