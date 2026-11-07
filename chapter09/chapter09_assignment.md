@@ -6,7 +6,7 @@
 - 이름: `이경석`
 - GitHub ID: `leeks2026`
 - 작성일: `20261107`
-- 최종 Notebook URL:
+- 최종 Notebook URL: `https://github.com/leeks2026/llm-data-analysis-study/blob/main/chapter09/chapter09.ipynb`
 
 ## 1. 예측 문제 정의
 - Target: 주문 1건의 주문 상세 금액 합계 `order_total`
@@ -230,6 +230,8 @@ python scripts/run_regression_analysis.py
 - Train CV Selected Model: Random Forest
 - Final Validation 전체 PASS 여부: 전체 PASS
 - Notebook 결과와 스크립트 결과의 일관성: 일치
+
+![전체 재실행 확인](images/step07.png)
 
 ---
 
