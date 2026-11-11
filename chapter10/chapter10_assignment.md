@@ -5,7 +5,7 @@
 ## 제출 정보
 - 이름: `이경석`
 - GitHub ID: `leeks2026`
-- 작성일: `20261111`
+- 작성일: `20261112`
 - 최종 Notebook URL: `https://github.com/leeks2026/llm-data-analysis-study/blob/main/chapter10/chapter10.ipynb`
 
 ## 1. 분류 문제 정의
