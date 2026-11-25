@@ -1,0 +1,17 @@
+﻿season,day_type,group,days,mean,median
+autumn,weekday,candidate_unconfirmed,116,4857210.327586,4990374.500000
+autumn,weekday,rain_at_least_0.1,56,4596961.517857,4923179.500000
+autumn,weekend,candidate_unconfirmed,44,3263293.545455,2981491.000000
+autumn,weekend,rain_at_least_0.1,24,3207438.000000,3312921.000000
+spring,weekday,candidate_unconfirmed,134,4949002.932836,5048208.500000
+spring,weekday,rain_at_least_0.1,46,4684302.695652,4917530.000000
+spring,weekend,candidate_unconfirmed,45,3263461.822222,3013999.000000
+spring,weekend,rain_at_least_0.1,25,3159903.240000,3330520.000000
+summer,weekday,candidate_unconfirmed,81,4717177.111111,4836798.000000
+summer,weekday,rain_at_least_0.1,83,4659500.108434,4693892.000000
+summer,weekend,candidate_unconfirmed,37,3008956.891892,2885844.000000
+summer,weekend,rain_at_least_0.1,34,2972480.147059,3157188.000000
+winter,weekday,candidate_unconfirmed,124,4688664.024194,4781764.500000
+winter,weekday,rain_at_least_0.1,45,4525833.066667,4755321.000000
+winter,weekend,candidate_unconfirmed,44,2972591.772727,2817960.500000
+winter,weekend,rain_at_least_0.1,23,3120680.043478,3055986.000000

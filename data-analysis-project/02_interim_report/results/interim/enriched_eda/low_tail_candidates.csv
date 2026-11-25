@@ -1,0 +1,13 @@
+﻿date,day_type,group,boardings_06_24,daily_rain_mm,season
+2024-09-17,weekday,candidate_unconfirmed,1616100,,autumn
+2023-09-29,weekday,candidate_unconfirmed,1628170,,autumn
+2023-01-23,weekday,candidate_unconfirmed,1815968,,winter
+2025-01-29,weekday,rain_at_least_0.1,1423402,0.200000,winter
+2025-10-06,weekday,rain_at_least_0.1,1543136,36.800000,autumn
+2025-01-28,weekday,rain_at_least_0.1,1651936,0.100000,winter
+2024-02-10,weekend,candidate_unconfirmed,1487924,,winter
+2023-01-21,weekend,candidate_unconfirmed,1756684,,winter
+2023-01-01,weekend,candidate_unconfirmed,1864898,,winter
+2025-10-05,weekend,rain_at_least_0.1,2004834,18.100000,autumn
+2023-09-30,weekend,rain_at_least_0.1,2026697,4.500000,autumn
+2023-07-23,weekend,rain_at_least_0.1,2102918,40.200000,summer

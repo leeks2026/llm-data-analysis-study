@@ -1,0 +1,10 @@
+2026-11-26T00:34:08+09:00
+test_blank_zero_and_rain_boundaries_remain_distinct (test_interim_enrichment.InterimEnrichmentTests.test_blank_zero_and_rain_boundaries_remain_distinct) ... ok
+test_daily_group_distribution_matches_input_rows (test_interim_enrichment.InterimEnrichmentTests.test_daily_group_distribution_matches_input_rows) ... ok
+test_seasons_and_periods_cover_the_intended_calendar_and_hours (test_interim_enrichment.InterimEnrichmentTests.test_seasons_and_periods_cover_the_intended_calendar_and_hours) ... ok
+test_two_hour_period_matches_original_hour_values (test_interim_enrichment.InterimEnrichmentTests.test_two_hour_period_matches_original_hour_values) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.129s
+
+OK

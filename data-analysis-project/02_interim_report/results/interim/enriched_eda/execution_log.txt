@@ -1,0 +1,8 @@
+=== Interim additional daily-record analysis ===
+Run time (KST): 2026-11-26T00:24:22+09:00
+Dates: 1,096; common boarding-hour rows: 19,728; 2-hour period rows: 3,288
+Daily group counts: {'candidate_unconfirmed': 625, 'rain_at_least_0.1': 336, 'recorded_0.0': 132, 'other_or_unresolved': 3}
+Each date's 18-hour sum matches the daily total: True
+Created: seasonal/yearly comparisons, three-period summaries, distributions, low-tail candidates
+Comparison: daily rain record; candidate is unconfirmed; weekdays include holidays.
+No hourly rainfall exposure, causal estimate, or final-stage model is calculated.

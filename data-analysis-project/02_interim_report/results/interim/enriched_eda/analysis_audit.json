@@ -1,0 +1,18 @@
+{
+  "run_time_kst": "2026-11-26T00:24:22+09:00",
+  "input_sha256": {
+    "daily_joined.csv": "028e8afe30ef682190e4f635b83ea9d783f89fccd44eaa6adf0745f907afcbc5",
+    "hourly_subway.csv": "41056dc5b494fbb7f8c2b0b41c9398be69744e13a104d80f1e2c293e216b031a"
+  },
+  "daily_dates": 1096,
+  "hourly_common_boarding_rows": 19728,
+  "period_date_rows": 3288,
+  "group_counts": {
+    "candidate_unconfirmed": 625,
+    "rain_at_least_0.1": 336,
+    "recorded_0.0": 132,
+    "other_or_unresolved": 3
+  },
+  "hourly_sums_equal_daily": true,
+  "scope": "Stage-two daily rainfall exploratory summaries; hourly weather not used; holidays remain in weekdays."
+}
