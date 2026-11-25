@@ -1,0 +1,9 @@
+test_duplicate_source_key_is_rejected (test_interim_integrity.InterimIntegrityTests.test_duplicate_source_key_is_rejected) ... ok
+test_missing_weather_is_never_zero_filled (test_interim_integrity.InterimIntegrityTests.test_missing_weather_is_never_zero_filled) ... ok
+test_unmatched_weather_date_stops_analysis (test_interim_integrity.InterimIntegrityTests.test_unmatched_weather_date_stops_analysis) ... ok
+test_yearly_time_band_spellings (test_interim_integrity.InterimIntegrityTests.test_yearly_time_band_spellings) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.052s
+
+OK

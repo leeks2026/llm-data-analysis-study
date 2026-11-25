@@ -1,0 +1,2 @@
+PASS: daily station totals, precipitation groups and descriptive statistics match the prior baseline.
+PASS: the interim output folder contains no later-stage model tables.

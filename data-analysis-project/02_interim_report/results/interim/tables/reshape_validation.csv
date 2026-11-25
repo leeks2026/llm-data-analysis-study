@@ -1,0 +1,5 @@
+﻿population,direction,before_reshape,after_reshape,equal
+common,승차,4760795829,4760795829,True
+common,하차,4765057461,4765057461,True
+all,승차,4763868691,4763868691,True
+all,하차,4767784597,4767784597,True

@@ -1,0 +1,32 @@
+[
+  {
+    "year": 2023,
+    "source_page": "https://data.seoul.go.kr/dataList/OA-12921/A/1/datasetView.do",
+    "download_sequence": "45",
+    "retrieved_utc": "2026-11-19T10:30:34.322580+00:00",
+    "http_status": 200,
+    "bytes": 24907001,
+    "sha256": "0bb6af0b8ac63d9f679ab2031930db3ec50ca80860ce6cc9ac4e1051a93cfe0f",
+    "file": "subway_2023.csv"
+  },
+  {
+    "year": 2024,
+    "source_page": "https://data.seoul.go.kr/dataList/OA-12921/A/1/datasetView.do",
+    "download_sequence": "44",
+    "retrieved_utc": "2026-11-19T10:30:35.736911+00:00",
+    "http_status": 200,
+    "bytes": 25007673,
+    "sha256": "8629c3a13ac94155cc3310db88e494f66119cbe543d9dfb44a82305d433fdd15",
+    "file": "subway_2024.csv"
+  },
+  {
+    "year": 2025,
+    "source_page": "https://data.seoul.go.kr/dataList/OA-12921/A/1/datasetView.do",
+    "download_sequence": "46",
+    "retrieved_utc": "2026-11-19T10:30:36.861252+00:00",
+    "http_status": 200,
+    "bytes": 25029452,
+    "sha256": "99591265daf498015499f03913cd3253a57c3ff976ae182f9c4af89fcca4e5ba",
+    "file": "subway_2025.csv"
+  }
+]

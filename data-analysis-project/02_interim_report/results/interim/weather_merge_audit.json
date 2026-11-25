@@ -1,0 +1,26 @@
+{
+  "source_file": "asos_seoul_2023_2025.csv",
+  "encoding": "cp949",
+  "sha256": "3b09bfc8a78ad8295bad4ccf3a7c4f6e76a2afd2514fd08b5b5f6b2f0f587d65",
+  "rows": 1096,
+  "date_first": "2023-01-01",
+  "date_last": "2025-12-31",
+  "missing_calendar_days": 0,
+  "out_of_range_days": 0,
+  "rain_blank_days": 628,
+  "temp_missing_days": 0,
+  "dry_candidates_unconfirmed": 625,
+  "rain_category_counts": {
+    "blank_unresolved": 628,
+    "at_least_0.1mm": 336,
+    "recorded_0.0mm": 132
+  },
+  "rain_duration_available": true,
+  "article_available": true,
+  "unmatched_subway_dates": 0,
+  "hourly_rows_before_merge": 87680,
+  "hourly_rows_after_merge": 87680,
+  "hourly_passenger_sum_before_merge": 19057506578,
+  "hourly_passenger_sum_after_merge": 19057506578,
+  "scope_note": "Hourly rows contain both the common and all-station aggregates."
+}

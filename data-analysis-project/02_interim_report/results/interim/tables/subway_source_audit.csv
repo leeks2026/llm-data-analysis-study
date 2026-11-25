@@ -1,0 +1,4 @@
+﻿year,filename,encoding,raw_rows,fully_empty_rows,valid_rows,candidate_key_duplicate_rows,first_date,last_date,observed_dates,missing_dates,station_line_code_pairs,boarding_all_bands,alighting_all_bands
+2023,subway_2023.csv,cp949,199270,0,199270,0,2023-01-01,2023-12-31,365,0,282,1547141920,1549100770
+2024,subway_2024.csv,cp949,199410,0,199410,0,2024-01-01,2024-12-31,366,0,273,1596247904,1597499089
+2025,subway_2025.csv,cp949,199424,134,199290,0,2025-01-01,2025-12-31,365,0,273,1620478867,1621184738

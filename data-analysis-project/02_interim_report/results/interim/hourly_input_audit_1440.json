@@ -1,0 +1,49 @@
+{
+  "source": {
+    "bundle": "20261124143557.zip",
+    "bundle_sha256": "5896b33f7c52522d8e8466031cd9f68a73dccf2037b988985fc85146f79660e4",
+    "source_files": [
+      {
+        "file": "SURFACE_ASOS_108_HR_2023_2023_2024.csv",
+        "bytes": 921550,
+        "sha256": "3a2af352fa287f7da6f85bc4a477018828ec6f3f65427d0f07a697b7e212aa65",
+        "rows": 8760
+      },
+      {
+        "file": "SURFACE_ASOS_108_HR_2024_2024_2025.csv",
+        "bytes": 921852,
+        "sha256": "f645ec0f28d541abee842abd10ef9396f5a2e7dbcd9f25950785fa7f85081c95",
+        "rows": 8784
+      },
+      {
+        "file": "SURFACE_ASOS_108_HR_2025_2025_2026.csv",
+        "bytes": 920206,
+        "sha256": "2bcb2a36aa98c98ed33f4bdb22813c4e8214f2f427544ce57ece26ad831e524b",
+        "rows": 8760
+      }
+    ]
+  },
+  "observations": 26304,
+  "first_observation": "2023-01-01 00:00:00",
+  "last_observation": "2025-12-31 23:00:00",
+  "timestamp_gaps_or_duplicates": 0,
+  "precipitation_values": {
+    "blank": 23110,
+    "zero": 1377,
+    "positive": 1817
+  },
+  "temperature_blanks": 0,
+  "daily_sum_diagnostic": {
+    "same_date": {
+      "positive_daily_values_with_hourly_sum": 336,
+      "close_within_0_05_mm": 187,
+      "median_absolute_difference_mm": 1.1102230246251565e-16
+    },
+    "shift_back_one_hour": {
+      "positive_daily_values_with_hourly_sum": 336,
+      "close_within_0_05_mm": 336,
+      "median_absolute_difference_mm": 0.0
+    }
+  },
+  "caveat": "Blank precipitation is unresolved, not labeled as zero; time alignment is not confirmed."
+}

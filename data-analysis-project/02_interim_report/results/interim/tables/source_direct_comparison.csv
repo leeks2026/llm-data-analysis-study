@@ -1,0 +1,2 @@
+﻿date,line,station_code,station_name,direction,time_band,raw_count,normalized_count,equal
+2023-01-01,1호선,150,서울역,승차,06-07,145,145,True
