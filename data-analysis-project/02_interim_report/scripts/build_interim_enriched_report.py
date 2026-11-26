@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-from reportlab.graphics.shapes import Circle, Drawing, Line, PolyLine, String
+from reportlab.graphics.shapes import Drawing, Line, PolyLine, Rect, String
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
@@ -91,7 +91,7 @@ definitions = {
     "ReportMeta": dict(fontName="InterimKorean", fontSize=8.8, leading=13.2, spaceAfter=5),
     "ReportHeading": dict(fontName="InterimKoreanBold", fontSize=11.4, leading=16.0,
                           spaceBefore=5.5, spaceAfter=3.5, keepWithNext=True),
-    "ReportBody": dict(fontName="InterimKorean", fontSize=10.15, leading=15.2, spaceAfter=4.1),
+    "ReportBody": dict(fontName="InterimKorean", fontSize=10.15, leading=15.2, spaceAfter=3.1),
     "ReportSmall": dict(fontName="InterimKorean", fontSize=8.8, leading=12.7, spaceAfter=3),
     "ReportCell": dict(fontName="InterimKorean", fontSize=8.8, leading=12.7),
     "ReportCellHead": dict(fontName="InterimKoreanBold", fontSize=8.8, leading=12.7),
@@ -129,8 +129,8 @@ def table(rows: list[list[object]], widths: list[float]) -> Table:
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("LEFTPADDING", (0, 0), (-1, -1), 3),
         ("RIGHTPADDING", (0, 0), (-1, -1), 3),
-        ("TOPPADDING", (0, 0), (-1, -1), 2.3),
-        ("BOTTOMPADDING", (0, 0), (-1, -1), 2.3),
+        ("TOPPADDING", (0, 0), (-1, -1), 1.5),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 1.5),
     ]))
     return obj
 
@@ -226,40 +226,90 @@ def period_row(period: str, band: str) -> dict[str, str]:
     return next(r for r in periods if r["period"] == period and r["rain_band"] == band)
 
 
+def right_text(drawing: Drawing, right: float, y: float, text: str, size: float = 8) -> None:
+    width = pdfmetrics.stringWidth(text, "InterimKorean", size)
+    drawing.add(String(right - width, y, text, fontName="InterimKorean", fontSize=size,
+                       fillColor=colors.black))
+
+
+def center_text(drawing: Drawing, center: float, y: float, text: str, size: float = 8,
+                font: str = "InterimKorean") -> None:
+    width = pdfmetrics.stringWidth(text, font, size)
+    drawing.add(String(center - width / 2, y, text, fontName=font, fontSize=size,
+                       fillColor=colors.black))
+
+
+def seasonal_difference_chart() -> Drawing:
+    """Compare existing daily-record group means; samples are reported in table 5."""
+    drawing = Drawing(492, 145)
+    drawing.add(String(2, 133, "후보일 대비 강수 기록일의 일평균 승차 차이 (%)",
+                       fontName="InterimKorean", fontSize=8.5, fillColor=colors.black))
+    seasons = [("spring", "봄"), ("summer", "여름"), ("autumn", "가을"), ("winter", "겨울")]
+    for day_type, title, x0, shade in [("weekday", "평일 (공휴일 포함)", 38, 0.35),
+                                       ("weekend", "주말", 288, 0.58)]:
+        x1 = x0 + 176
+        center_text(drawing, (x0 + x1) / 2, 116, title, 8.6, "InterimKoreanBold")
+
+        def position(value: float) -> float:
+            return x0 + (value + 8) / 16 * (x1 - x0)
+
+        for value in [-5, 0, 5]:
+            x = position(value)
+            drawing.add(Line(x, 21, x, 110,
+                             strokeColor=colors.black if value == 0 else colors.lightgrey,
+                             strokeWidth=0.65 if value == 0 else 0.4))
+            center_text(drawing, x, 8, f"{value:+d}" if value else "0", 7.6)
+        zero = position(0)
+        for i, (season, label) in enumerate(seasons):
+            y = 100 - i * 23
+            value = float(seasonal_row(season, day_type)["rain_minus_candidate_pct"])
+            assert -8 <= value <= 8
+            x = position(value)
+            right_text(drawing, x0 - 6, y - 2.5, label, 8.5)
+            drawing.add(Rect(min(x, zero), y - 4.5, abs(x - zero), 9,
+                             fillColor=colors.Color(shade, shade, shade),
+                             strokeColor=colors.black, strokeWidth=0.35))
+            label_value = f"{value:+.1f}%"
+            if value < 0:
+                right_text(drawing, x - 3, y - 2.6, label_value, 7.6)
+            else:
+                drawing.add(String(x + 3, y - 2.6, label_value, fontName="InterimKorean",
+                                   fontSize=7.6, fillColor=colors.black))
+    return drawing
+
+
 def period_difference_chart() -> Drawing:
-    """Unadjusted differences based on the day's total rain, not hourly rain."""
-    drawing = Drawing(492, 153)
-    series = [("0.1_to_lt5", "0.1-5mm 미만", None),
-              ("5_to_lt20", "5-20mm 미만", [5, 2]),
-              ("at_least_20", "20mm 이상", [1, 2])]
-    for i, (_, label, dash) in enumerate(series):
-        x = 45 + i * 151
-        drawing.add(Line(x, 143, x + 19, 143, strokeColor=colors.black, strokeWidth=1.2,
-                         strokeDashArray=dash))
-        drawing.add(String(x + 23, 140, label, fontName="InterimKorean", fontSize=8,
+    """Bars show existing unadjusted differences grouped by daily rainfall."""
+    drawing = Drawing(492, 155)
+    series = [("0.1_to_lt5", "0.1-5mm 미만", 0.78),
+              ("5_to_lt20", "5-20mm 미만", 0.50),
+              ("at_least_20", "20mm 이상", 0.23)]
+    for i, (_, label, shade) in enumerate(series):
+        x = 7 + i * 151
+        drawing.add(Rect(x, 141, 10, 7, fillColor=colors.Color(shade, shade, shade),
+                         strokeColor=colors.black, strokeWidth=0.35))
+        drawing.add(String(x + 14, 141, label, fontName="InterimKorean", fontSize=8.0,
                            fillColor=colors.black))
-    x0, x1, y0, y1 = 58, 465, 28, 124
+
+    x0, x1 = 111, 463
     for value in [-10, -5, 0]:
-        y = y0 + (value + 10) / 10 * (y1-y0)
-        drawing.add(Line(x0, y, x1, y, strokeColor=colors.lightgrey, strokeWidth=.45))
-        drawing.add(String(x0-25, y-3, str(value), fontName="InterimKorean", fontSize=8,
-                           fillColor=colors.black))
-    drawing.add(Line(x0, y0, x0, y1, strokeColor=colors.black, strokeWidth=.5))
-    positions = [x0+35, (x0+x1)/2, x1-35]
-    for x, label in zip(positions, ["출근 07-09", "낮 12-14", "퇴근 17-19"]):
-        drawing.add(String(x-32, 12, label, fontName="InterimKorean", fontSize=8.5,
-                           fillColor=colors.black))
-    for key, _, dash in series:
-        points = []
-        for x, period in zip(positions, ["morning", "midday", "evening"]):
+        x = x0 + (value + 10) / 10 * (x1 - x0)
+        drawing.add(Line(x, 24, x, 134, strokeColor=colors.black if value == 0 else colors.lightgrey,
+                         strokeWidth=0.65 if value == 0 else 0.4))
+        center_text(drawing, x, 12, str(value), 7.8)
+    for y, period, label in [(121, "morning", "출근 07-09시"),
+                              (82, "midday", "낮 12-14시"),
+                              (43, "evening", "퇴근 17-19시")]:
+        right_text(drawing, x0 - 10, y - 2.5, label, 8.5)
+        for offset, (key, _, shade) in zip([9, 0, -9], series):
             value = float(period_row(period, key)["difference_pct"])
             assert -10 <= value <= 0
-            y = y0 + (value+10)/10*(y1-y0)
-            points.extend([x, y])
-        drawing.add(PolyLine(points, strokeColor=colors.black, strokeWidth=1.2,
-                             strokeDashArray=dash, fillColor=None))
-        for x, y in zip(points[::2], points[1::2]):
-            drawing.add(Circle(x, y, 2.1, strokeColor=colors.black, fillColor=colors.white))
+            x = x0 + (value + 10) / 10 * (x1 - x0)
+            bar_y = y + offset
+            drawing.add(Rect(x, bar_y - 3.5, x1 - x, 7,
+                             fillColor=colors.Color(shade, shade, shade),
+                             strokeColor=colors.black, strokeWidth=0.35))
+            right_text(drawing, x - 4, bar_y - 2.5, f"{value:+.1f}%", 7.4)
     return drawing
 
 
@@ -355,7 +405,7 @@ story = [
         table(source_rows, [17*mm, 29*mm, 25*mm, 29*mm, 20*mm, 54*mm]),
         p("표 1. 연도별 원자료 점검. 2025년의 완전히 빈 행 134개를 제외한 뒤 각 연도의 후보 고유키 중복은 0건이었습니다. 역·호선 코드 수는 연도별 제공 범위를 뜻하며, 세 연도 공통 범위는 272개입니다.", "ReportSmall"),
     ]),
-    p("변환 전후의 승차·하차 합계를 공통 역과 전체 역으로 나누어 대조했습니다. 아래 합계는 3년 원자료의 모든 시간 구간을 포함한 검증값입니다. 각 모집단을 중복해서 합산한 승객 수가 아니라 변환이 값을 보존했는지를 확인하는 수치입니다."),
+    KeepTogether([p("변환 전후의 승차·하차 합계를 공통 역과 전체 역으로 나누어 대조했습니다. 아래 합계는 3년 원자료의 모든 시간 구간을 포함한 검증값입니다. 각 모집단을 중복해서 합산한 승객 수가 아니라 변환이 값을 보존했는지를 확인하는 수치입니다.")]),
     KeepTogether([
         table([
             ["검증 대상", "승하차", "변환 전", "변환 후"],
@@ -393,6 +443,10 @@ story = [
         p("표 5. 날짜 수와 06-24시 일평균 승차 건수입니다. 평일에는 공휴일이 포함됩니다. 후보는 확정 무강수가 아니며, 0.0mm와 나머지 미확인 기록은 두 비교집단에서 제외했습니다.", "ReportSmall"),
     ]),
     p("평일 강수 기록일의 단순 평균은 후보일보다 봄 약 5.3%, 여름 약 1.2%, 가을 약 5.4%, 겨울 약 3.5% 낮았습니다. 주말에는 겨울 강수 기록일의 평균이 후보일보다 높게 나타나는 등 방향도 일정하지 않았습니다. 계절별로 나눈 비교이지만 같은 연도·월·요일·기온까지 맞춘 결과는 아니므로 차이의 원인은 판단할 수 없습니다."),
+    KeepTogether([
+        seasonal_difference_chart(),
+        p("그림 2. 계절·요일 구분별로 미확인 후보일의 일평균 승차를 기준으로 계산한 강수 기록일의 차이(%). 집단별 날짜 수와 평균은 표 5에 표시했습니다. 후보일은 확정 무강수가 아닙니다.", "ReportSmall"),
+    ]),
 
     h("4.2 일강수 강도별 출근·낮·퇴근 패턴"),
     p("평일의 07-09시, 12-14시, 17-19시 승차 건수를 각각 두 시간 합계로 만들었습니다. 모든 날짜에서 18개 시간대의 합계가 기존 일별 승차 합계와 같은지 확인한 뒤, 하루 전체 강수량 구간별로 각 시간대 평균을 비교했습니다."),
@@ -402,7 +456,7 @@ story = [
     ]),
     KeepTogether([
         period_difference_chart(),
-        p("그림 2. 평일 미확인 후보일의 시간대별 평균을 기준으로 계산한 차이(%). 세 선은 일강수량의 구간을 뜻합니다. 이 그림은 같은 시간에 비가 왔는지를 보여주지 않습니다.", "ReportSmall"),
+        p("그림 3. 평일 미확인 후보일의 시간대별 평균을 기준으로 계산한 차이(%). 막대는 일강수량의 구간을 뜻하며, 해당 시간에 실제 비가 왔는지를 보여주지 않습니다.", "ReportSmall"),
     ]),
     p("예를 들어 일강수 20mm 이상인 52일의 평균은 후보 455일보다 출근 약 3.5%, 낮 약 7.8%, 퇴근 약 4.7% 낮았습니다. 이는 서로 다른 날짜 집단의 단순 평균 차이이며 표본의 계절·공휴일·요일 구성이 다를 수 있습니다. 시간대 사이에 강수의 영향이 다르다고 결론 내릴 수는 없습니다."),
 
@@ -417,12 +471,12 @@ story = [
     # 시간자료와 정렬 검토
     h("5. 시간별 기상자료 확보와 진행 중 확인한 문제"),
     p("일강수량은 같은 날의 모든 시간대에 붙일 수 있지만 특정 시간의 강수 여부를 알려주지 않습니다. 이 한계를 보완하기 위해 서울 ASOS 108번의 시간자료를 추가로 확보했습니다. 2023년 8,760행, 2024년 8,784행, 2025년 8,760행으로 총 26,304행이며 시간 표기의 누락·중복은 확인되지 않았습니다."),
-    table([
+    KeepTogether([table([
         ["시간 강수량 기록", "행 수", "현재 처리"],
         ["빈칸", "23,110", "0으로 채우지 않고 의미를 추가 확인합니다."],
         ["0.0mm", "1,377", "빈칸과 구분해 별도 기록으로 유지합니다."],
         ["양의 값", "1,817", "시간 구간을 확인한 뒤 비교에 활용할 계획입니다."],
-    ], [42*mm, 28*mm, 104*mm]),
+    ], [42*mm, 28*mm, 104*mm])]),
     p("시간 자료를 지하철의 1시간 구간과 연결하려면 표기 시각이 구간의 시작인지 종료인지 확인해야 합니다. 양의 일강수량이 관측된 336일을 대상으로 시간자료를 하루 단위로 합산해 두 가지 정렬을 대조했습니다."),
     KeepTogether([
         table([
@@ -452,9 +506,8 @@ story = [
     h("8. GPT 활용 및 결과 검증"),
     p("작성자는 연구 질문과 분석 범위를 정하고 GitHub·기상청 인증 및 기상자료 다운로드를 수행했습니다. GPT를 활용해 데이터 처리·기초 분석 코드와 보고서 초안을 작성하고 실행 결과를 점검했습니다. 생성된 코드의 결과는 원자료 직접 대조, 변환·결합 전후 합계와 결측 분류로 확인했습니다."),
     p("기존 중복 후보키·결측·미매칭·시간대 표기 검증 4개와 추가 분석의 강수 구간 경계·계절 및 시간대 정의·시간대 합산·분포 대조 검증 4개를 실행해 모두 통과했습니다. 추가 탐색은 기존 입력으로 2026-11-26 Codespaces에서 다시 수행했으며, 결과표와 실행 로그·화면을 별첨과 공개 저장소에 보관했습니다."),
-    p("검증에는 중복키와 기상 미매칭을 가진 별도의 시험 자료를 만들어 코드가 오류를 감지하는지 확인하는 과정도 포함했습니다. 이 시험은 일부 처리 조건만 확인하며, 원자료의 모든 오류를 검증하지는 못합니다."),
+    p("중복키·기상 미매칭 오류 감지도 시험했으나, 원자료의 모든 오류를 검증하지는 못합니다."),
     p('<link href="https://data.seoul.go.kr/dataList/OA-12921/F/1/datasetView.do" color="black">서울 열린데이터광장 OA-12921</link> · <link href="https://data.kma.go.kr/data/grnd/selectAsosRltmList.do?pgmNo=36" color="black">기상청 종관기상관측(ASOS)</link> · <link href="https://github.com/leeks2026/llm-data-analysis-study/tree/main/data-analysis-project/02_interim_report" color="black">2차 공개 GitHub 자료</link>', "ReportSmall"),
-    p('GitHub: <link href="https://github.com/leeks2026/llm-data-analysis-study/tree/main/data-analysis-project/02_interim_report" color="black">github.com/leeks2026/llm-data-analysis-study/tree/main/data-analysis-project/02_interim_report</link>', "ReportSmall"),
     PageBreak(),
 
     # 별첨 1쪽
@@ -510,7 +563,7 @@ def footer(canvas, doc):
 
 SimpleDocTemplate(
     str(REPORT), pagesize=A4, leftMargin=18*mm, rightMargin=18*mm,
-    topMargin=15*mm, bottomMargin=19*mm,
+    topMargin=14*mm, bottomMargin=17*mm,
     title="2차 중간 보고서: 서울 강수와 지하철 이용", author="이경석"
 ).build(story, onFirstPage=footer, onLaterPages=footer)
 print(REPORT)
