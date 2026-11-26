@@ -1,0 +1,4 @@
+2026-11-26T09:36:35+09:00
+Created figures from archived stage-two result tables:
+/workspaces/llm-data-analysis-study/data-analysis-project/EDA/figures/01_seasonal_difference.png
+/workspaces/llm-data-analysis-study/data-analysis-project/EDA/figures/02_weekday_period_difference.png
